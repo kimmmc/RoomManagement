@@ -63,6 +63,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // Setup Navigation to DbActivity
+        android.widget.Button btnDb = findViewById(R.id.btnDb);
+        btnDb.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, DbActivity.class);
+            startActivity(intent);
+        });
+
         // Back button placeholder
         TextView btnBack = findViewById(R.id.btnBack);
         btnBack.setOnClickListener(v -> finish());
