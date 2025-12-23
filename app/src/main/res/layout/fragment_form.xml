@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:id="@+id/formContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Dynamic Fields will be added/toggled here programmatically or via specific XML inclusions -->
+        
+        <!-- Common Name/Title Field -->
+        <EditText
+            android:id="@+id/etName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Name / Title" />
+
+        <!-- Common Description/Category Field -->
+        <EditText
+            android:id="@+id/etDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Description / Category"
+            android:layout_marginTop="8dp"/>
+
+        <!-- Extra Field 1 (Capacity / Email) -->
+        <EditText
+            android:id="@+id/etExtra1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Capacity / Email"
+            android:layout_marginTop="8dp"/>
+            
+        <!-- Extra Field 2 (Price / Date) -->
+        <EditText
+            android:id="@+id/etExtra2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Price / Date"
+            android:layout_marginTop="8dp"/>
+
+        <!-- Spinner for Relation (Room / Course) -->
+        <Spinner
+            android:id="@+id/spinnerRelation"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/bg_spinner_rounded"
+            android:visibility="gone"/>
+
+        <!-- RadioGroup for Gender (Student) -->
+        <RadioGroup
+            android:id="@+id/rgGender"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp"
+            android:visibility="gone">
+            <RadioButton
+                android:id="@+id/rbMale"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Male"/>
+            <RadioButton
+                android:id="@+id/rbFemale"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Female"/>
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/btnSave"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Save"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="@color/header_blue"/>
+
+    </LinearLayout>
+</ScrollView>
