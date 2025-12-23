@@ -107,7 +107,7 @@ public class EntityFormFragment extends Fragment {
             spinnerRelation.setVisibility(View.VISIBLE);
             rgGender.setVisibility(View.GONE);
 
-            ApiClient.getService().getRooms().enqueue(new Callback<List<DBRoom>>() {
+            ApiClient.getService(requireContext()).getRooms().enqueue(new Callback<List<DBRoom>>() {
                 @Override
                 public void onResponse(Call<List<DBRoom>> call, Response<List<DBRoom>> response) {
                     if (response.isSuccessful() && response.body() != null) {
@@ -136,7 +136,7 @@ public class EntityFormFragment extends Fragment {
             spinnerRelation.setVisibility(View.VISIBLE);
             rgGender.setVisibility(View.VISIBLE);
 
-            ApiClient.getService().getCourses().enqueue(new Callback<List<Course>>() {
+            ApiClient.getService(requireContext()).getCourses().enqueue(new Callback<List<Course>>() {
                 @Override
                 public void onResponse(Call<List<Course>> call, Response<List<Course>> response) {
                     if (response.isSuccessful() && response.body() != null) {
@@ -160,7 +160,7 @@ public class EntityFormFragment extends Fragment {
 
     private void loadRecordData() {
         if (DbActivity.TYPE_ROOM.equals(type)) {
-            ApiClient.getService().getRoom(recordId).enqueue(new Callback<DBRoom>() {
+            ApiClient.getService(requireContext()).getRoom(recordId).enqueue(new Callback<DBRoom>() {
                 @Override
                 public void onResponse(Call<DBRoom> call, Response<DBRoom> response) {
                     if (response.isSuccessful() && response.body() != null) {
@@ -177,7 +177,7 @@ public class EntityFormFragment extends Fragment {
                 }
             });
         } else if (DbActivity.TYPE_COURSE.equals(type)) {
-            ApiClient.getService().getCourse(recordId).enqueue(new Callback<Course>() {
+            ApiClient.getService(requireContext()).getCourse(recordId).enqueue(new Callback<Course>() {
                 @Override
                 public void onResponse(Call<Course> call, Response<Course> response) {
                     if (response.isSuccessful() && response.body() != null) {
@@ -193,7 +193,7 @@ public class EntityFormFragment extends Fragment {
                 }
             });
         } else if (DbActivity.TYPE_STUDENT.equals(type)) {
-            ApiClient.getService().getStudent(recordId).enqueue(new Callback<Student>() {
+            ApiClient.getService(requireContext()).getStudent(recordId).enqueue(new Callback<Student>() {
                 @Override
                 public void onResponse(Call<Student> call, Response<Student> response) {
                     if (response.isSuccessful() && response.body() != null) {
@@ -236,7 +236,7 @@ public class EntityFormFragment extends Fragment {
 
             if (recordId != -1) {
                 room.setId(recordId);
-                ApiClient.getService().updateRoom(recordId, room).enqueue(new Callback<DBRoom>() {
+                ApiClient.getService(requireContext()).updateRoom(recordId, room).enqueue(new Callback<DBRoom>() {
                     @Override
                     public void onResponse(Call<DBRoom> c, Response<DBRoom> r) {
                         getParentFragmentManager().popBackStack();
@@ -248,7 +248,7 @@ public class EntityFormFragment extends Fragment {
                     }
                 });
             } else {
-                ApiClient.getService().addRoom(room).enqueue(new Callback<DBRoom>() {
+                ApiClient.getService(requireContext()).addRoom(room).enqueue(new Callback<DBRoom>() {
                     @Override
                     public void onResponse(Call<DBRoom> c, Response<DBRoom> r) {
                         getParentFragmentManager().popBackStack();
@@ -271,7 +271,7 @@ public class EntityFormFragment extends Fragment {
 
             if (recordId != -1) {
                 course.setId(recordId);
-                ApiClient.getService().updateCourse(recordId, course).enqueue(new Callback<Course>() {
+                ApiClient.getService(requireContext()).updateCourse(recordId, course).enqueue(new Callback<Course>() {
                     @Override
                     public void onResponse(Call<Course> c, Response<Course> r) {
                         getParentFragmentManager().popBackStack();
@@ -283,7 +283,7 @@ public class EntityFormFragment extends Fragment {
                     }
                 });
             } else {
-                ApiClient.getService().addCourse(course).enqueue(new Callback<Course>() {
+                ApiClient.getService(requireContext()).addCourse(course).enqueue(new Callback<Course>() {
                     @Override
                     public void onResponse(Call<Course> c, Response<Course> r) {
                         getParentFragmentManager().popBackStack();
@@ -309,19 +309,20 @@ public class EntityFormFragment extends Fragment {
             Student student = new Student(p1, p2, gender, courseId, "");
             if (recordId != -1) {
                 student.setId(recordId);
-                ApiClient.getService().updateStudent(recordId, student).enqueue(new Callback<Student>() {
-                    @Override
-                    public void onResponse(Call<Student> c, Response<Student> r) {
-                        getParentFragmentManager().popBackStack();
-                    }
+                ApiClient.getService(requireContext()).updateStudent(recordId, student)
+                        .enqueue(new Callback<Student>() {
+                            @Override
+                            public void onResponse(Call<Student> c, Response<Student> r) {
+                                getParentFragmentManager().popBackStack();
+                            }
 
-                    @Override
-                    public void onFailure(Call<Student> c, Throwable t) {
-                        getParentFragmentManager().popBackStack();
-                    }
-                });
+                            @Override
+                            public void onFailure(Call<Student> c, Throwable t) {
+                                getParentFragmentManager().popBackStack();
+                            }
+                        });
             } else {
-                ApiClient.getService().addStudent(student).enqueue(new Callback<Student>() {
+                ApiClient.getService(requireContext()).addStudent(student).enqueue(new Callback<Student>() {
                     @Override
                     public void onResponse(Call<Student> c, Response<Student> r) {
                         getParentFragmentManager().popBackStack();

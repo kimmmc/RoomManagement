@@ -78,18 +78,19 @@ public class EntityListFragment extends Fragment {
             @Override
             public void onDelete(Object item) {
                 if (item instanceof DBRoom) {
-                    ApiClient.getService().deleteRoom(((DBRoom) item).getId()).enqueue(new retrofit2.Callback<Void>() {
-                        @Override
-                        public void onResponse(retrofit2.Call<Void> call, retrofit2.Response<Void> r) {
-                            loadData();
-                        }
+                    ApiClient.getService(requireContext()).deleteRoom(((DBRoom) item).getId())
+                            .enqueue(new retrofit2.Callback<Void>() {
+                                @Override
+                                public void onResponse(retrofit2.Call<Void> call, retrofit2.Response<Void> r) {
+                                    loadData();
+                                }
 
-                        @Override
-                        public void onFailure(retrofit2.Call<Void> call, Throwable t) {
-                        }
-                    });
+                                @Override
+                                public void onFailure(retrofit2.Call<Void> call, Throwable t) {
+                                }
+                            });
                 } else if (item instanceof Course) {
-                    ApiClient.getService().deleteCourse(((Course) item).getId())
+                    ApiClient.getService(requireContext()).deleteCourse(((Course) item).getId())
                             .enqueue(new retrofit2.Callback<Void>() {
                                 @Override
                                 public void onResponse(retrofit2.Call<Void> call, retrofit2.Response<Void> r) {
@@ -101,7 +102,7 @@ public class EntityListFragment extends Fragment {
                                 }
                             });
                 } else if (item instanceof Student) {
-                    ApiClient.getService().deleteStudent(((Student) item).getId())
+                    ApiClient.getService(requireContext()).deleteStudent(((Student) item).getId())
                             .enqueue(new retrofit2.Callback<Void>() {
                                 @Override
                                 public void onResponse(retrofit2.Call<Void> call, retrofit2.Response<Void> r) {
@@ -136,7 +137,7 @@ public class EntityListFragment extends Fragment {
     private void loadData() {
         // Display loading indicator if possible (omitted for brevity)
         if (DbActivity.TYPE_ROOM.equals(type)) {
-            ApiClient.getService().getRooms().enqueue(new retrofit2.Callback<List<DBRoom>>() {
+            ApiClient.getService(requireContext()).getRooms().enqueue(new retrofit2.Callback<List<DBRoom>>() {
                 @Override
                 public void onResponse(retrofit2.Call<List<DBRoom>> call, retrofit2.Response<List<DBRoom>> response) {
                     if (response.isSuccessful() && response.body() != null) {
@@ -151,7 +152,7 @@ public class EntityListFragment extends Fragment {
                 }
             });
         } else if (DbActivity.TYPE_COURSE.equals(type)) {
-            ApiClient.getService().getCourses().enqueue(new retrofit2.Callback<List<Course>>() {
+            ApiClient.getService(requireContext()).getCourses().enqueue(new retrofit2.Callback<List<Course>>() {
                 @Override
                 public void onResponse(retrofit2.Call<List<Course>> call, retrofit2.Response<List<Course>> response) {
                     if (response.isSuccessful() && response.body() != null) {
@@ -165,7 +166,7 @@ public class EntityListFragment extends Fragment {
                 }
             });
         } else if (DbActivity.TYPE_STUDENT.equals(type)) {
-            ApiClient.getService().getStudents().enqueue(new retrofit2.Callback<List<Student>>() {
+            ApiClient.getService(requireContext()).getStudents().enqueue(new retrofit2.Callback<List<Student>>() {
                 @Override
                 public void onResponse(retrofit2.Call<List<Student>> call, retrofit2.Response<List<Student>> response) {
                     if (response.isSuccessful() && response.body() != null) {
